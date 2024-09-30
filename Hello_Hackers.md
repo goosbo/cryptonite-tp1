@@ -16,4 +16,4 @@ Therefore typing `hello` and pressing the enter key retrieves the required flag.
 
 In the given example, arguments seem to follow the command after a space.
 
-Since the description of the problem states that the command `hello` must be invoked with argument `hackers`, `hello hackers` is invoked in the prompt. This retrieves the required key.
+Since the description of the problem states that the command `hello` must be invoked with argument `hackers`, therefore `hello hackers` is entered in the prompt. This retrieves the required key.
