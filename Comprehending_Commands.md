@@ -8,7 +8,7 @@ The `flag` file is in the home directory and contains the required flag.
 
 The text in the `flag` file can be read by using it's relative path as an argument with the `cat` command.
 
-`cat flag` gives the required flag.
+`cat flag` gives the flag `pwn.college{8f3pgfeT52ciZkd-cTMJU3Z5b_w.dFzN1QDL4kjN0czW}`.
 
 ## catting absolute paths
 
@@ -17,12 +17,15 @@ The `flag` file is now in the root directory.
 The file can be read using `cat` just like the previous challenge but it's absolute path is used as an argument instead.
 
 `cat /flag`
+flag: `pwn.college{ULJdZLLR469NJbwgpwPcKxQUJ8B.dlTM5QDL4kjN0czW}`
 
 ## more catting practice
 
-The `flag` file is in the `/usr/lib/tcltk` directory and it's absolute path must be used again.
+The `flag` file is in the `/lib/python3.8/config-3.8-x86_64-linux-gnu/` directory and it's absolute path must be used again.
 
-`cat /usr/lib/tcltk/flag`
+`cat /lib/python3.8/config-3.8-x86_64-linux-gnu/flag`
+flag: `pwn.college{A5CDyaYpRRUAQr9O3kpFctGu9aI.dBjM5QDL4kjN0czW}`
+
 
 ## grepping for a needle in a haystack
 
@@ -31,6 +34,7 @@ The flag is in the `/challenge/data.txt` which contains a hundred thousand lines
 The `grep` command must be used to print out the specific line that contains the flag.
 
 The flag always starts with `pwn.college` therefore `grep pwn.college /challenge/data.txt` will retrieve the flag.
+flag: `pwn.college{gshFWqfFG89n0lxMUG7Agd6UCCs.ddTM4QDL4kjN0czW}`
 
 ## listing files
 
@@ -38,13 +42,14 @@ The flag always starts with `pwn.college` therefore `grep pwn.college /challenge
 
 After changing directory to `/challenge`, `ls` lists out all the files.
 
-The new name for run is, `21065-renamed-run-20616`
+The new name for run is, `21978-renamed-run-7345`
 
 ```
     cd /challenge
     ls
-    ./21065-renamed-run-20616
+    ./21978-renamed-run-7345
 ```
+flag: `pwn.college{M1KRKhxG8MEZkYeMVrBae7rH5gE.dhjM4QDL4kjN0czW}`
 
 ## touching files
 
@@ -57,6 +62,7 @@ touch /tmp/pwn
 touch /tmp/college
 /challenge/run
 ```
+flag: `pwn.college{oBy9ghXIPMexf_LM__pZrU-iXxx.dBzM4QDL4kjN0czW}`
 
 ## removing files
 
@@ -68,6 +74,7 @@ This can be done using the relative path of `delete_me` as an argument for the `
 rm delete_me
 /challenge/check
 ```
+flag: `pwn.college{UNYZMd-lvAISpYqyV720RaHsmA6.dZTOwUDL4kjN0czW}`
 
 ## hidden files
 
@@ -75,13 +82,15 @@ The flag is in a hidden file in the root directory.
 
 `ls -a` lists out all the files including hidden ones.
 
-Using this command in the root directory shows `.flag-295682353216` which contains the flag and it can be read using the `cat` command.
+Using this command in the root directory shows `.flag-23971766530490` which contains the flag and it can be read using the `cat` command.
 
 ```
 cd /
 ls -a
-cat .flag-295682353216
+cat .flag-23971766530490
 ```
+flag: `pwn.college{suMYID-J8ZdM0XEAsGlhijvQ_Vn.dBTN4QDL4kjN0czW}`
+
 
 ## An Epic Filesystem Quest
 
@@ -157,4 +166,8 @@ Watch out! The next clue is **trapped**. You'll need to read it out without 'cd'
 ```
 
 I run `ls /usr/local/share/radare2/5.9.5/syscall` which shows a file `ALERT-TRAPPED`
-`cat /usr/local/share/radare2/5.9.5/syscall` gives the flag
+`cat /usr/local/share/radare2/5.9.5/syscall` reads:
+```
+CONGRATULATIONS! Your perserverence has paid off, and you have found the flag!
+It is: pwn.college{EK-5G_iNeVRrSWX0t0OAfc-Cmvf.dljM4QDL4kjN0czW}
+```
