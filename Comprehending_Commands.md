@@ -171,3 +171,86 @@ I run `ls /usr/local/share/radare2/5.9.5/syscall` which shows a file `ALERT-TRAP
 CONGRATULATIONS! Your perserverence has paid off, and you have found the flag!
 It is: pwn.college{EK-5G_iNeVRrSWX0t0OAfc-Cmvf.dljM4QDL4kjN0czW}
 ```
+
+## making directories
+
+`/challenge/run` will output the flag when a file `college` exists in the folder `/tmp/pwn`
+
+`/tmp/pwn` can be created by using it as an argument for the `mkdir` command
+`college` can be created by using it's required path as an argument for the `touch` command
+```
+mkdir /tmp/pwn
+touch /tmp/pwn/college
+/challenge/run
+```
+flag: `pwn.college{kCxuXXh7Mw4b555UiOqq5D0YnFm.dFzM4QDL4kjN0czW}`
+
+## finding files
+
+The file `flag` must be found using the `find` command.
+
+`find / -name flag` gives the output:
+```
+find: ‘/tmp/tmp.MiOQGWw5Zc’: Permission denied
+find: ‘/etc/ssl/private’: Permission denied
+/usr/local/lib/python3.8/dist-packages/pwnlib/flag
+/usr/local/share/radare2/5.9.5/flag
+/usr/share/javascript/mathjax/jax/output/SVG/fonts/Gyre-Pagella/Size4/flag
+find: ‘/var/cache/apt/archives/partial’: Permission denied
+find: ‘/var/cache/ldconfig’: Permission denied
+find: ‘/var/cache/private’: Permission denied
+find: ‘/var/lib/apt/lists/partial’: Permission denied
+find: ‘/var/lib/mysql-files’: Permission denied
+find: ‘/var/lib/private’: Permission denied
+find: ‘/var/lib/mysql’: Permission denied
+find: ‘/var/lib/mysql-keyring’: Permission denied
+find: ‘/var/lib/php/sessions’: Permission denied
+find: ‘/var/log/private’: Permission denied
+find: ‘/var/log/apache2’: Permission denied
+find: ‘/var/log/mysql’: Permission denied
+find: ‘/run/mysqld’: Permission denied
+find: ‘/run/sudo’: Permission denied
+find: ‘/root’: Permission denied
+/opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/flag
+/opt/radare2/libr/flag
+find: ‘/proc/tty/driver’: Permission denied
+find: ‘/proc/1/task/1/fd’: Permission denied
+find: ‘/proc/1/task/1/fdinfo’: Permission denied
+find: ‘/proc/1/task/1/ns’: Permission denied
+find: ‘/proc/1/fd’: Permission denied
+find: ‘/proc/1/map_files’: Permission denied
+find: ‘/proc/1/fdinfo’: Permission denied
+find: ‘/proc/1/ns’: Permission denied
+find: ‘/proc/7/task/7/fd’: Permission denied
+find: ‘/proc/7/task/7/fdinfo’: Permission denied
+find: ‘/proc/7/task/7/ns’: Permission denied
+find: ‘/proc/7/fd’: Permission denied
+find: ‘/proc/7/map_files’: Permission denied
+find: ‘/proc/7/fdinfo’: Permission denied
+find: ‘/proc/7/ns’: Permission denied
+/nix/store/1yagn5s8sf7kcs2hkccgf8d0wxlrv5sz-radare2-5.9.0/share/radare2/5.9.0/flag
+/nix/store/pmvk2bk4p550w182rjfm529kfqddnvh3-python3.11-pwntools-4.12.0/lib/python3.11/site-packages/pwnlib/flag
+```
+
+I attempt to use `cat` on every file that does not show `Permission denied`
+
+`cat /usr/local/lib/python3.8/dist-packages/pwnlib/flag` reads:
+`cat: /usr/local/lib/python3.8/dist-packages/pwnlib/flag: Is a directory` therefore it is not the required flag
+
+Similarly, `cat /usr/local/share/radare2/5.9.5/flag.` reads:
+`cat: /usr/local/share/radare2/5.9.5/flag: Is a directory`, therefore it is not the required flag
+
+`cat /usr/share/javascript/mathjax/jax/output/SVG/fonts/Gyre-Pagella/Size4/flag` reads:
+`pwn.college{gwBiD1Wj5UVgNFnAAZks5IIUYSI.dJzM4QDL4kjN0czW}` therefore the flag is found
+
+## linking files
+
+`/challenge/catflag` reads out `~/not-the-flag`
+`~/not-the-flag` does not exist yet and the real flag is in `/flag`
+
+Therefore making `~/not-the-flag` a symbolic link to `/flag` would help retreive the flag
+```
+ln -s /flag not-the-flag
+/challenge/catflag
+```
+flag: `pwn.college{IsMhppb1msYkjQqtwnW1e-sfUL5.dlTM1UDL4kjN0czW}`
