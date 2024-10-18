@@ -187,5 +187,47 @@ This gives the output: `The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4`
 
 >password: 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
 
+# LEVEL 13
 
+I make a temporary directory using `mktemp -d` and copy `data.txt` to it
+
+When I use `xxd data.txt` I see that the magic number is `1f8b` which is of a gzip file.
+So I rename it to have a .gz extension and decompress it.
+```
+mv data.txt data.gz
+gzip -d data.gz
+```
+This makes a decompressed file `data`
+
+Now `xxd data` shows a magic number of `425a` which is that of a `bzip` file
+```
+mv data data.bz
+bzip2 -d data.bz
+```
+
+`xxd data` again shows that it is a gzip file so the process to decompress it is done again just like done previously.
+
+Now `cat data` shows that it contains a file `data5.bin` which means that it is a tar file
+```mv data data.tar
+tar -x -f data.tar
+```
+This decompresses it to show `data5.bin`
+
+Similarly `data5.bin` seems to be a tar file since it contains `data6.bin`
+The process is repeated and `data6.bin` is retrieved.
+
+`xxd data6.bin` shows the magic number `425a` which means it is a bzip file
+```
+mv data6.bin data6.bz
+bzip2 -d data6.bz
+```
+It decompresses it to give the file `data6`
+
+`data6` is a tar file containing `data8.bin` and is decompressed like one of the previous cases
+
+`data8.bin` has the magic number of a `gzip` file and is decompressed to `data8`
+
+`cat data8` gives the password
+
+>password: FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
 
