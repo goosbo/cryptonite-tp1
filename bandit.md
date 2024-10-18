@@ -160,4 +160,32 @@ zA=?0j
 ```
 
 Analysing the above output, the password is retrieved
->password FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+>password: FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+
+# LEVEL 11
+
+The password is in `data.txt` which is base64 encoded
+
+According to it's man page `base64 -d` will decode a base64 encoded file
+
+`base64 -d data.txt` gives the output:
+`The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr`
+
+>password: dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr 
+
+# LEVEL 12
+
+The password in `data.txt` is rot13 encrypted
+
+the `tr` translates text to the condition given in the argument
+
+`a` should become `n` and `n` should become `z` with each of the other letters following the required order
+The same is done with upper case letters
+
+`cat data.txt | tr a-zA-Z | n-ma-zN-ZA-M`
+This gives the output: `The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4`
+
+>password: 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+
+
+
