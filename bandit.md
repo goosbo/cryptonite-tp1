@@ -347,3 +347,26 @@ Since the password is stored in the only line that if different between `passwor
 Therefore,
 >password: x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
 
+# LEVEL 19
+
+Now this took a while for me to get but I found out after going through some posts online that ssh will run commands put after the standard connection statement. Since we know there is a `readme` file in the home directory.
+
+`ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme` will give the password
+
+>password: cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+
+# LEVEL 20
+
+`ls` shows a program `bandit20-do`
+
+Running it with `./bandit20-do` gives the output:
+```
+Run a command as another user.
+  Example: ./bandit20-do id
+```
+
+Since the password is in `/etc/bandit_pass/bandit20` and it is only accessible by bandit20,
+`./bandit20-do cat /etc/bandit_pass/bandit20` prints the password
+
+>password: 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+
