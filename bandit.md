@@ -231,3 +231,39 @@ It decompresses it to give the file `data6`
 
 >password: FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
 
+# LEVEL 14
+
+This time instead of a password a key is given that resides in the home folder.
+
+To retrieve the key to my own pc, I used `scp` which can securely transfer files through a connection.
+
+`scp -P 2220 bandit13@bandit.labs.overthewire.org:sshkey.private .`
+
+This retrieves the key and now you can access level 14 with `ssh -i ./sshkey.private bandit14@bandit.labs.overthewire.org`
+
+>password: given key
+>in the next level we find that the password is MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+
+# LEVEL 15
+
+The current password must be sent to local host at port 30000.
+
+Since all passwords are stored in `/etc/bandit_pass`, level 14's password can be retrieved with `cat /etc/bandit_pass/bandit14`
+
+`nc` can be used to transfer files by connection to a host
+
+`nc 127.0.0.1 30000` connects to local host at port 30000 and now if I enter the current password, I get the password for level 15.
+
+>password: 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+
+# LEVEL 16
+
+Just like the previous level, the current password should be sent to local host but at port 30001. This time it must be done with ssl/tls encryption.
+
+`ncat` also can be used to tranfer files and it has a flag called `--ssl` that does so with ssl/tls encryption.
+
+`ncat --ssl 127.0.0.1 30001` and now when I enter the current password I get the password for level 16.
+
+>password: kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+
+# LEVEL 17
